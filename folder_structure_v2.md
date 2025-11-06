@@ -26,10 +26,12 @@ lib/
 │ │ │ ├── models/
 │ │ │ │ └── user_model.dart
 │ │ │ └── repositories/
-│ │ │ └── auth_repository.dart
+│ │ │ │ └── auth_repository.dart
+│ │ │ └── services/
+│ │ │ │ └── auth_service.dart
 │ │ ├── domain/
 │ │ │ └── usecases/
-│ │ │ └── login_usecase.dart
+│ │ │ │ └── login_usecase.dart
 │ │ └── presentation/
 │ │ ├── pages/
 │ │ │ └── login_page.dart
@@ -57,3 +59,18 @@ lib/
 │
 └── routes/
 └── app_routes.dart # Centralized route definitions
+
+🧠 Analogy
+Imagine:
+api_client.dart = your car engine (how it drives)
+api_service.dart = your driver (knows where to go)
+repository.dart = your manager (decides when and why to go)
+
+api_client.dart => Handles HTTP => get(), post(), delete()
+api_endpoints.dart => Stores endpoints => /auth/login, /dashboard
+api_service.dart => Defines API actions => login(), fetchDashboardData()
+auth_repository.dart => Uses API service => Converts to models, applies logic
+https://chatgpt.com/s/t_690cbd849a0c8191906b34c655e197ae
+
+3 main layers
+https://chatgpt.com/s/t_690cbf20eff481919cba123bc9c3f8ed
