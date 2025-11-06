@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/src/config/env.dart';
+import 'package:flutter_boilerplate/src/core/config/env.dart';
 
 class AppConfig {
   static String get environment =>
