@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/core/constants/app_constants.dart';
-import 'package:flutter_boilerplate/src/core/extensions/context_extension.dart';
 import 'package:flutter_boilerplate/src/core/theme/app_theme.dart';
 import 'package:flutter_boilerplate/src/core/utils/app_utils.dart';
 import 'package:flutter_boilerplate/src/core/utils/size_utils.dart';
