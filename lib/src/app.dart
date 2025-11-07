@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/src/core/constants/app_constants.dart';
 import 'package:flutter_boilerplate/src/core/theme/app_theme.dart';
-import 'package:flutter_boilerplate/src/core/utils/app_utils.dart';
 import 'package:flutter_boilerplate/src/core/utils/size_utils.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/pages/login_page.dart';
-import 'package:flutter_boilerplate/src/shared/helpers/toast_helper.dart';
-import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
-import 'package:flutter_boilerplate/src/shared/mixins/snackbar_mixin.dart';
-import 'package:flutter_boilerplate/src/shared/widgets/custom_button.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
