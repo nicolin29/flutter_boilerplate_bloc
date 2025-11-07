@@ -3,6 +3,7 @@ import 'package:flutter_boilerplate/src/core/constants/app_constants.dart';
 import 'package:flutter_boilerplate/src/core/theme/app_theme.dart';
 import 'package:flutter_boilerplate/src/core/utils/app_utils.dart';
 import 'package:flutter_boilerplate/src/core/utils/size_utils.dart';
+import 'package:flutter_boilerplate/src/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter_boilerplate/src/shared/helpers/toast_helper.dart';
 import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
 import 'package:flutter_boilerplate/src/shared/mixins/snackbar_mixin.dart';
@@ -20,13 +21,15 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: AppTheme.lightTheme,
-          home: const MyHomePage(),
+          home: const LoginPage(),
         );
       },
     );
   }
 }
 
+/// Explore Purpose: DELETED SOON
+/*
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -62,3 +65,4 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 }
+*/
