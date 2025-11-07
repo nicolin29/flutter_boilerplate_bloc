@@ -65,4 +65,6 @@ class ApiClient {
       throw Exception(e.response?.data['message'] ?? e.message);
     }
   }
+
+  Dio get client => _dio;
 }
