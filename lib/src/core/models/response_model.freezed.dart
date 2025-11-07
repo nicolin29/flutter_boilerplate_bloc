@@ -13,22 +13,22 @@ part of 'response_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ResponseModel {
+mixin _$ResponseModel<T> {
 
- String get status; String get message; Map<String, dynamic>? get data;
+ String get status; String get message; T? get data;
 /// Create a copy of ResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ResponseModelCopyWith<ResponseModel> get copyWith => _$ResponseModelCopyWithImpl<ResponseModel>(this as ResponseModel, _$identity);
+$ResponseModelCopyWith<T, ResponseModel<T>> get copyWith => _$ResponseModelCopyWithImpl<T, ResponseModel<T>>(this as ResponseModel<T>, _$identity);
 
   /// Serializes this ResponseModel to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT);
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResponseModel&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResponseModel<T>&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,18 +37,18 @@ int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionE
 
 @override
 String toString() {
-  return 'ResponseModel(status: $status, message: $message, data: $data)';
+  return 'ResponseModel<$T>(status: $status, message: $message, data: $data)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ResponseModelCopyWith<$Res>  {
-  factory $ResponseModelCopyWith(ResponseModel value, $Res Function(ResponseModel) _then) = _$ResponseModelCopyWithImpl;
+abstract mixin class $ResponseModelCopyWith<T,$Res>  {
+  factory $ResponseModelCopyWith(ResponseModel<T> value, $Res Function(ResponseModel<T>) _then) = _$ResponseModelCopyWithImpl;
 @useResult
 $Res call({
- String status, String message, Map<String, dynamic>? data
+ String status, String message, T? data
 });
 
 
@@ -56,12 +56,12 @@ $Res call({
 
 }
 /// @nodoc
-class _$ResponseModelCopyWithImpl<$Res>
-    implements $ResponseModelCopyWith<$Res> {
+class _$ResponseModelCopyWithImpl<T,$Res>
+    implements $ResponseModelCopyWith<T, $Res> {
   _$ResponseModelCopyWithImpl(this._self, this._then);
 
-  final ResponseModel _self;
-  final $Res Function(ResponseModel) _then;
+  final ResponseModel<T> _self;
+  final $Res Function(ResponseModel<T>) _then;
 
 /// Create a copy of ResponseModel
 /// with the given fields replaced by the non-null parameter values.
@@ -70,7 +70,7 @@ class _$ResponseModelCopyWithImpl<$Res>
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as T?,
   ));
 }
 
@@ -78,7 +78,7 @@ as Map<String, dynamic>?,
 
 
 /// Adds pattern-matching-related methods to [ResponseModel].
-extension ResponseModelPatterns on ResponseModel {
+extension ResponseModelPatterns<T> on ResponseModel<T> {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -91,7 +91,7 @@ extension ResponseModelPatterns on ResponseModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ResponseModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ResponseModel<T> value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ResponseModel() when $default != null:
@@ -113,7 +113,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ResponseModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ResponseModel<T> value)  $default,){
 final _that = this;
 switch (_that) {
 case _ResponseModel():
@@ -134,7 +134,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ResponseModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ResponseModel<T> value)?  $default,){
 final _that = this;
 switch (_that) {
 case _ResponseModel() when $default != null:
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String status,  String message,  Map<String, dynamic>? data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String status,  String message,  T? data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ResponseModel() when $default != null:
 return $default(_that.status,_that.message,_that.data);case _:
@@ -176,7 +176,7 @@ return $default(_that.status,_that.message,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String status,  String message,  Map<String, dynamic>? data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String status,  String message,  T? data)  $default,) {final _that = this;
 switch (_that) {
 case _ResponseModel():
 return $default(_that.status,_that.message,_that.data);case _:
@@ -196,7 +196,7 @@ return $default(_that.status,_that.message,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String status,  String message,  Map<String, dynamic>? data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String status,  String message,  T? data)?  $default,) {final _that = this;
 switch (_that) {
 case _ResponseModel() when $default != null:
 return $default(_that.status,_that.message,_that.data);case _:
@@ -208,58 +208,50 @@ return $default(_that.status,_that.message,_that.data);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
+@JsonSerializable(genericArgumentFactories: true)
 
-class _ResponseModel implements ResponseModel {
-  const _ResponseModel({required this.status, required this.message, final  Map<String, dynamic>? data}): _data = data;
-  factory _ResponseModel.fromJson(Map<String, dynamic> json) => _$ResponseModelFromJson(json);
+class _ResponseModel<T> implements ResponseModel<T> {
+  const _ResponseModel({required this.status, required this.message, this.data});
+  factory _ResponseModel.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$ResponseModelFromJson(json,fromJsonT);
 
 @override final  String status;
 @override final  String message;
- final  Map<String, dynamic>? _data;
-@override Map<String, dynamic>? get data {
-  final value = _data;
-  if (value == null) return null;
-  if (_data is EqualUnmodifiableMapView) return _data;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
+@override final  T? data;
 
 /// Create a copy of ResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ResponseModelCopyWith<_ResponseModel> get copyWith => __$ResponseModelCopyWithImpl<_ResponseModel>(this, _$identity);
+_$ResponseModelCopyWith<T, _ResponseModel<T>> get copyWith => __$ResponseModelCopyWithImpl<T, _ResponseModel<T>>(this, _$identity);
 
 @override
-Map<String, dynamic> toJson() {
-  return _$ResponseModelToJson(this, );
+Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
+  return _$ResponseModelToJson<T>(this, toJsonT);
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResponseModel&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResponseModel<T>&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data));
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data));
 
 @override
 String toString() {
-  return 'ResponseModel(status: $status, message: $message, data: $data)';
+  return 'ResponseModel<$T>(status: $status, message: $message, data: $data)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ResponseModelCopyWith<$Res> implements $ResponseModelCopyWith<$Res> {
-  factory _$ResponseModelCopyWith(_ResponseModel value, $Res Function(_ResponseModel) _then) = __$ResponseModelCopyWithImpl;
+abstract mixin class _$ResponseModelCopyWith<T,$Res> implements $ResponseModelCopyWith<T, $Res> {
+  factory _$ResponseModelCopyWith(_ResponseModel<T> value, $Res Function(_ResponseModel<T>) _then) = __$ResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
- String status, String message, Map<String, dynamic>? data
+ String status, String message, T? data
 });
 
 
@@ -267,21 +259,21 @@ $Res call({
 
 }
 /// @nodoc
-class __$ResponseModelCopyWithImpl<$Res>
-    implements _$ResponseModelCopyWith<$Res> {
+class __$ResponseModelCopyWithImpl<T,$Res>
+    implements _$ResponseModelCopyWith<T, $Res> {
   __$ResponseModelCopyWithImpl(this._self, this._then);
 
-  final _ResponseModel _self;
-  final $Res Function(_ResponseModel) _then;
+  final _ResponseModel<T> _self;
+  final $Res Function(_ResponseModel<T>) _then;
 
 /// Create a copy of ResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = null,Object? data = freezed,}) {
-  return _then(_ResponseModel(
+  return _then(_ResponseModel<T>(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,data: freezed == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as String,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as T?,
   ));
 }
 

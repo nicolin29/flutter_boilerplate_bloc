@@ -1,14 +1,14 @@
 class ApiEndpoints {
   // Base paths
-  static const String auth = '/auth';
-  static const String user = '/user';
+  static const String _auth = '/auth';
+  static const String _user = '/user';
 
   // Auth endpoints
-  static const String login = '$auth/login';
-  static const String register = '$auth/register';
-  static const String logout = '$auth/logout';
+  static const String login = '$_auth/login';
+  static const String register = '$_auth/register';
+  static const String logout = '$_auth/logout';
 
   // User endpoints
-  static const String profile = '$user/profile';
-  static const String update = '$user/update';
+  static const String profile = '$_user/profile';
+  static const String update = '$_user/update';
 }

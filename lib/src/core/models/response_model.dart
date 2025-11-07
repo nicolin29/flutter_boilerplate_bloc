@@ -1,16 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'response_model.freezed.dart';
-part 'response_model.g.dart'; // only if you want JSON
+part 'response_model.g.dart';
 
-@freezed
-abstract class ResponseModel with _$ResponseModel {
+@Freezed(genericArgumentFactories: true)
+abstract class ResponseModel<T> with _$ResponseModel<T> {
   const factory ResponseModel({
     required String status,
     required String message,
-    Map<String, dynamic>? data,
-  }) = _ResponseModel;
+    T? data,
+  }) = _ResponseModel<T>;
 
-  factory ResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ResponseModelFromJson(json);
+  factory ResponseModel.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) => _$ResponseModelFromJson(json, fromJsonT);
 }

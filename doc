@@ -1,0 +1,86 @@
+https://chatgpt.com/s/t_690dac8c66fc8191b59c93f79dc12f9e
+Full Login Flow – Clean Architecture
+1️⃣ UI Layer
+
+Purpose: Collects input (email, password), triggers actions in Cubit, and reacts to state changes.
+
+Components:
+
+LoginPage
+
+LoginForm widget
+
+2️⃣ Cubit / Bloc
+
+Purpose: Manages the login state (loading, success, failure) and communicates with UseCase.
+
+Responsibilities:
+
+Call LoginUseCase
+
+Emit states: AuthInitial, AuthLoading, AuthSuccess, AuthFailure
+
+3️⃣ Auth State
+
+Represents the different states of login in Cubit:
+
+AuthInitial → default state
+
+AuthLoading → API call in progress
+
+AuthSuccess → login successful, contains UserModel
+
+AuthFailure → login failed, contains error message
+
+4️⃣ UseCase (LoginUseCase)
+
+Purpose: Encapsulates business logic and orchestrates repository calls.
+
+Receives input (email, password) and returns UserModel.
+
+Can handle additional business rules if needed.
+
+5️⃣ Repository (AuthRepository)
+
+Purpose: Handles data transformation and persistence.
+
+Responsibilities:
+
+Call AuthService for raw API request
+
+Validate ResponseModel
+
+Map ResponseModel.data['user'] → UserModel
+
+Save token in SharedPreferences
+
+6️⃣ Service (AuthService)
+
+Purpose: Raw API call using Dio.
+
+Responsibilities:
+
+Hit the endpoint (ApiEndpoints.login)
+
+Return a typed ResponseModel<Map<String, dynamic>>
+
+Catch Dio/network errors
+
+7️⃣ Network / API Client
+
+Purpose: Configure Dio, base URL, timeouts, headers.
+
+ApiEndpoints contains all endpoint strings.
+
+✅ Summary of Flow
+UI → collects input → calls AuthCubit.login().
+AuthCubit → emits AuthLoading, calls LoginUseCase.execute().
+LoginUseCase → calls AuthRepository.login().
+AuthRepository → calls AuthService.login(), validates ResponseModel, maps data['user'] → UserModel, saves token.
+AuthService → makes Dio API call, returns ResponseModel<Map<String, dynamic>>.
+Response flows back → Cubit emits AuthSuccess or AuthFailure → UI updates.
+
+---
+
+UI Flow:
+https://chatgpt.com/s/t_690dad9dacb08191b4f52585bf4d8ae6
