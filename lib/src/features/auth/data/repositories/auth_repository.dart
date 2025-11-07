@@ -1,5 +1,5 @@
 import 'package:flutter_boilerplate/src/features/auth/data/models/user_model.dart';
-import 'package:flutter_boilerplate/src/features/auth/data/services/auth_service.dart';
+import 'package:flutter_boilerplate/src/features/auth/data/datasources/auth_service.dart';
 
 class AuthRepository {
   final AuthService _authService;
