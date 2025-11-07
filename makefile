@@ -13,11 +13,12 @@ NOCOLOR     := \033[0m
 help:
 	@echo -e "$(GREEN)Flutter Project Makefile$(NOCOLOR)"
 	@echo "Usage:"
-	@echo "  make run-dev       # Run app in development"
-	@echo "  make run-prod      # Run app in production"
-	@echo "  make build-apk-dev       # Build APK for development"
-	@echo "  make build-apk-prod      # Build APK for production"
-	@echo "  make clean         # Clean project"
+	@echo "  make run-dev			# Run app in development"
+	@echo "  make run-prod			# Run app in production"
+	@echo "  make build-apk-dev		# Build APK for development"
+	@echo "  make build-apk-prod		# Build APK for production"
+	@echo "  make build-runner		# Build Runner with delete conflicting outputs"
+	@echo "  make clean			# Clean project"
 
 # ---------------------------------------------
 # Run targets
@@ -42,6 +43,14 @@ build-apk-dev:
 build-apk-prod:
 	@echo -e "$(RED)Building APK for production$(NOCOLOR)"
 	flutter build apk --dart-define=ENVIRONMENT=production
+
+# ---------------------------------------------
+# Build Runner
+# ---------------------------------------------
+.PHONY: build-runner
+build-runner:
+	@echo -e "$(GREEN)Build Runner with Delete Conflicting Outputs$(NOCOLOR)"
+	dart run build_runner build --delete-conflicting-outputs
 
 # ---------------------------------------------
 # Clean project
