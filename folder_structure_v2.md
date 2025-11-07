@@ -12,6 +12,7 @@ lib/
 │ ├── utils/
 │ │ └── date_utils.dart # Example: helper functions for dates
 │ │ └── string_utils.dart # Example: helper functions for string
+│ │ └── share_helper.dart
 │ ├── errors/
 │ │ └── app_exceptions.dart # Custom exceptions
 │ ├── network/
@@ -20,9 +21,6 @@ lib/
 │ ├── theme/
 │ │ ├── app_colors.dart
 │ │ └── app_theme.dart
-│ ├── helpers/
-│ │ ├── share_helper.dart
-│ │ └── storage_helper.dart
 │
 ├── features/ # Feature-based modules
 │ ├── auth/
@@ -56,8 +54,6 @@ lib/
 │ │ └── custom_text_field.dart
 │ ├── dialogs/
 │ │ └── confirmation_dialog.dart
-│ └── extensions/
-│ └── string_extensions.dart
 │
 └── routes/
 └── app_routes.dart # Centralized route definitions
@@ -82,3 +78,20 @@ https://chatgpt.com/s/t_690cc331a8808191b4c22c127684a2f1
 
 example of usecase
 https://chatgpt.com/s/t_690cc44b1bac819183e84d922eabed9a
+
+🧠 What each folder should ideally contain
+Folder Purpose Example contents
+🧱 core/
+App-level building blocks — things that define the foundation of your architecture. Framework-level logic, theme, constants, extensions, etc.
+theme/, utils/, constants/, extensions/, di/
+
+🧩 features/
+Feature modules — each represents a slice of your app with its own data, domain, and presentation layers.
+auth/, home/, profile/, etc.
+
+🧰 shared/
+Cross-feature reusable UI components (widgets, dialogs, custom buttons, form fields, etc.) and non-core helpers.
+widgets/, mixins/, helpers/
+
+shared foldering
+https://chatgpt.com/s/t_690d47b634488191b0fe863c15c409e1

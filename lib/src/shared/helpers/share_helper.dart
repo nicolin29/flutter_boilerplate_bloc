@@ -1,6 +1,6 @@
 import 'package:share_plus/share_plus.dart';
 
-class ShareUtils {
+class ShareHelpers {
   static Future<void> text(String text) async {
     await SharePlus.instance.share(ShareParams(text: text));
   }
