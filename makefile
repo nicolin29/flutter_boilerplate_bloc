@@ -1,16 +1,17 @@
 # Makefile for Flutter project with environment shortcuts
 
 # Colors for terminal output
-GREEN  := \033[0;32m
+RED    := \033[1;31m
+GREEN  := \033[1;32m
 YELLOW := \033[1;33m
-NC     := \033[0m
+NOCOLOR     := \033[0m
 
 # ---------------------------------------------
 # Default help command
 # ---------------------------------------------
 .PHONY: help
 help:
-	@echo -e "$(GREEN)Flutter Project Makefile$(NC)"
+	@echo -e "$(GREEN)Flutter Project Makefile$(NOCOLOR)"
 	@echo "Usage:"
 	@echo "  make run-dev       # Run app in development"
 	@echo "  make run-prod      # Run app in production"
@@ -23,11 +24,11 @@ help:
 # ---------------------------------------------
 .PHONY: run-dev run-prod
 run-dev:
-	@echo -e "$(YELLOW)Running Flutter app in development$(NC)"
+	@echo -e "$(YELLOW)Running Flutter app in development$(NOCOLOR)"
 	flutter run --dart-define=ENVIRONMENT=development
 
 run-prod:
-	@echo -e "$(YELLOW)Running Flutter app in production$(NC)"
+	@echo -e "$(RED)Running Flutter app in production$(NOCOLOR)"
 	flutter run --dart-define=ENVIRONMENT=production
 
 # ---------------------------------------------
@@ -35,11 +36,11 @@ run-prod:
 # ---------------------------------------------
 .PHONY: build-apk-dev build-apk-prod
 build-apk-dev:
-	@echo -e "$(YELLOW)Building APK for development$(NC)"
+	@echo -e "$(YELLOW)Building APK for development$(NOCOLOR)"
 	flutter build apk --dart-define=ENVIRONMENT=development
 
 build-apk-prod:
-	@echo -e "$(YELLOW)Building APK for production$(NC)"
+	@echo -e "$(RED)Building APK for production$(NOCOLOR)"
 	flutter build apk --dart-define=ENVIRONMENT=production
 
 # ---------------------------------------------
@@ -47,5 +48,5 @@ build-apk-prod:
 # ---------------------------------------------
 .PHONY: clean
 clean:
-	@echo -e "$(YELLOW)Cleaning Flutter project$(NC)"
+	@echo -e "$(GREEN)Cleaning Flutter project$(NOCOLOR)"
 	flutter clean
