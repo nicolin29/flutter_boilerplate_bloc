@@ -14,4 +14,7 @@ class AppConfig {
         throw Exception('BaseUrl not found');
     }
   }
+
+  static const int connectTimeout = 5000;
+  static const int receiveTimeout = 30000;
 }

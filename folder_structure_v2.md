@@ -100,3 +100,20 @@ presentation/pages/ -> scaffold & page-level layout
 presentation/widgets/ -> reusable form/UI components
 presentation/cubit/ -> manages state
 https://chatgpt.com/s/t_690d502eca388191a43d87d93a23010e
+
+Goals:
+LoginPage
+↓
+LoginForm
+↓
+AuthCubit
+↓
+LoginUseCase
+↓
+AuthRepository
+↓
+AuthService
+↓
+ApiClient
+↓
+Backend
