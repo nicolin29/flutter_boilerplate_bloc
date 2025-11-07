@@ -117,3 +117,6 @@ AuthService
 ApiClient
 ↓
 Backend
+
+form validation
+https://chatgpt.com/s/t_690e13f64f4c819194e9ec3988d49c24
