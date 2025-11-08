@@ -13,7 +13,8 @@ class AuthService {
     String password,
   ) async {
     final response = await _apiClient.get(
-      ApiEndpoints.login,
+      // ApiEndpoints.login,
+      '/comments',
       data: {'email': email, 'password': password},
     );
     return ResponseModel.fromJson(
