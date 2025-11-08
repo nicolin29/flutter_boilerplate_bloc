@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/core/config/app_config.dart';
 import 'package:flutter_boilerplate/src/core/network/interceptors/error_interceptor.dart';
 import 'package:flutter_boilerplate/src/core/network/interceptors/logging_interceptor.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiClient {
   late final Dio _dio;
@@ -30,11 +27,7 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
   }) async {
-    return await _dio.get(
-      path + 'asd',
-      queryParameters: queryParams,
-      data: data,
-    );
+    return await _dio.get(path, queryParameters: queryParams, data: data);
   }
 
   // POST request
