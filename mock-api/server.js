@@ -7,41 +7,31 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Example posts
-const posts = [
-  { id: "1", title: "a title", views: 100 },
-  { id: "2", title: "another title", views: 200 },
-];
+const profile = {
+  id: 1,
+  name: "John Doe",
+  email: "johndoe@email.com",
+};
 
-// Example comments
-const comments = [
-  { id: "1", text: "a comment about post 1", postId: "1" },
-  { id: "2", text: "another comment about post 1", postId: "1" },
-];
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
 
-// Example profile
-const profile = { name: "typicode" };
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password required" });
+  }
 
-// Routes with custom responses
-app.get("/posts/:id", (req, res) => {
-  const post = posts.find((p) => p.id === req.params.id);
-  if (!post) return res.status(404).json({ message: "Post not found" });
-  res.status(200).json(post);
-});
-
-app.get("/comments", (req, res) => {
-  // Example: force error for testing
-  const errorMode = req.query.error;
-  if (errorMode === "500")
-    return res.status(500).json({ message: "Server error" });
-  res.status(200).json(comments);
-});
-
-app.get("/profile", (req, res) => {
-  // Example: force unauthorized
-  const auth = req.headers.authorization;
-  if (!auth) return res.status(401).json({ message: "Unauthorized" });
-  res.status(200).json(profile);
+  if (email === "johndoe@email.com" && password === "123456") {
+    return res.status(200).json({
+      status: "success",
+      message: "Login Successful",
+      data: {
+        token: "ABC123",
+        user: profile,
+      },
+    });
+  } else {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 });
 
 app.listen(PORT, () => {

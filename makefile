@@ -25,11 +25,7 @@ help:
 # Run targets
 # ---------------------------------------------
 .PHONY: run-dev run-prod
-run-dev:
-	@echo -e "$(YELLOW)Setting up mock API server$(NOCOLOR)"
-	cd mock-api && npm install
-	@echo -e "$(YELLOW)Starting mock API server in background$(NOCOLOR)"
-	cd mock-api && node server.js &
+run-dev: server-start
 	@echo -e "$(YELLOW)Running Flutter app in development$(NOCOLOR)"
 	flutter run --dart-define=ENVIRONMENT=development
 
@@ -72,3 +68,26 @@ clean:
 analyze:
 	@echo -e "$(GREEN)Analyzing Flutter project$(NOCOLOR)"
 	flutter analyze
+
+
+# ---------------------------------------------
+# Mock API server management (with nodemon)
+# ---------------------------------------------
+MOCK_API_DIR := mock-api
+SERVER_SCRIPT := server.js
+
+.PHONY: server-start server-stop server-restart
+
+server-start:
+	@echo "Installing dependencies..."
+	cd $(MOCK_API_DIR) && npm install
+	@echo "Starting mock API server with nodemon..."
+	# Start nodemon in background
+	cd $(MOCK_API_DIR) && nohup npx nodemon $(SERVER_SCRIPT) > server.log 2>&1 &
+	@echo "Mock API server started"
+
+server-stop:
+	@echo "Stopping mock API server..."
+	@pkill -f "$(SERVER_SCRIPT)" || echo "No running server found"
+
+server-restart: server-stop server-start
