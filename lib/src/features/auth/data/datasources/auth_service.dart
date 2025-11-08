@@ -12,7 +12,7 @@ class AuthService {
     String email,
     String password,
   ) async {
-    final response = await _apiClient.get(
+    final response = await _apiClient.post(
       ApiEndpoints.login,
       data: {'email': email, 'password': password},
     );
