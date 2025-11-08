@@ -13,12 +13,13 @@ NOCOLOR     := \033[0m
 help:
 	@echo -e "$(GREEN)Flutter Project Makefile$(NOCOLOR)"
 	@echo "Usage:"
-	@echo "  make run-dev			# Run app in development"
-	@echo "  make run-prod			# Run app in production"
-	@echo "  make build-apk-dev		# Build APK for development"
-	@echo "  make build-apk-prod		# Build APK for production"
-	@echo "  make build-runner		# Build Runner with delete conflicting outputs"
-	@echo "  make clean			# Clean project"
+	@echo "  make run-dev		# Run app in development"
+	@echo "  make run-prod		# Run app in production"
+	@echo "  make build-apk-dev	# Build APK for development"
+	@echo "  make build-apk-prod	# Build APK for production"
+	@echo "  make build-runner	# Build Runner with delete conflicting outputs"
+	@echo "  make clean		# Clean project"
+	@echo "  make analyze		# Analyze project with linter"
 
 # ---------------------------------------------
 # Run targets
@@ -59,3 +60,11 @@ build-runner:
 clean:
 	@echo -e "$(GREEN)Cleaning Flutter project$(NOCOLOR)"
 	flutter clean
+
+# ---------------------------------------------
+# Analyze with linter
+# ---------------------------------------------
+.PHONY: analyze
+analyze:
+	@echo -e "$(GREEN)Analyzing Flutter project$(NOCOLOR)"
+	flutter analyze
