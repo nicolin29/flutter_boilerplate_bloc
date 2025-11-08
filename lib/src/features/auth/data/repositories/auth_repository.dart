@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/src/features/auth/data/models/user_model_old.dart';
+import 'package:flutter_boilerplate/src/features/auth/data/models/user_model.dart';
 import 'package:flutter_boilerplate/src/features/auth/data/datasources/auth_service.dart';
 
 class AuthRepository {
@@ -6,7 +6,7 @@ class AuthRepository {
 
   AuthRepository(this._authService);
 
-  Future<UserModelOld> login(String email, String password) async {
+  Future<UserModel> login(String email, String password) async {
     final response = await _authService.login(email, password);
 
     if (response.status != 'success') {

@@ -1,14 +1,14 @@
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
 import 'package:flutter_boilerplate/src/core/network/api_client.dart';
 import 'package:flutter_boilerplate/src/core/network/api_endpoints.dart';
-import 'package:flutter_boilerplate/src/features/auth/data/models/login_response_model_old.dart';
+import 'package:flutter_boilerplate/src/features/auth/data/models/login_response_model.dart';
 
 class AuthService {
   final ApiClient _apiClient;
 
   AuthService(this._apiClient);
 
-  Future<ResponseModel<LoginResponseModelOld>> login(
+  Future<ResponseModel<LoginResponseModel>> login(
     String email,
     String password,
   ) async {
@@ -18,7 +18,7 @@ class AuthService {
     );
     return ResponseModel.fromJson(
       response.data,
-      (data) => LoginResponseModelOld.fromJson(data as Map<String, dynamic>),
+      (data) => LoginResponseModel.fromJson(data as Map<String, dynamic>),
     );
   }
 }
