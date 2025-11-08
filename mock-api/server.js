@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { ApiResponse } from "./api-response.js";
 
 const app = express();
 const PORT = 3000;
@@ -17,20 +18,20 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "Email and password required" });
+    return ApiResponse.error(res, "Email and password required", 400);
   }
 
   if (email === "johndoe@email.com" && password === "123456") {
-    return res.status(200).json({
-      status: "success",
-      message: "Login Successful",
-      data: {
+    return ApiResponse.success(
+      res,
+      {
         token: "ABC123",
         user: profile,
       },
-    });
+      "Login Successful"
+    );
   } else {
-    return res.status(401).json({ message: "Unauthorized" });
+    return ApiResponse.error(res, "Unauthorized", 401);
   }
 });
 
