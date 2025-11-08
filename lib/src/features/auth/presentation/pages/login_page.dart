@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boilerplate/src/core/di/injection.dart';
-import 'package:flutter_boilerplate/src/core/utils/error_utils.dart';
-import 'package:flutter_boilerplate/src/features/auth/domain/login_usecase.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_state.dart';
-
-import 'package:flutter_boilerplate/src/shared/helpers/toast_helper.dart';
 import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,14 +21,33 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.whenOrNull(
+          initial: () => hideLoading(),
+          loading: () => showLoading(),
+          success: (user) {
+            hideLoading();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Welcome ${user.name}')));
+          },
+          failure: (message) {
+            hideLoading();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
+          },
+        );
+      },
       builder: (context, state) {
         return buildLoadingOverlay(
           child: Scaffold(
             appBar: AppBar(title: Text('Login Page')),
-            body: ElevatedButton(
-              onPressed: _onLoginPressed,
-              child: Text('Click Me'),
+            body: Center(
+              child: ElevatedButton(
+                onPressed: _onLoginPressed,
+                child: Text('Click Me'),
+              ),
             ),
           ),
         );
