@@ -1,5 +1,6 @@
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
 import 'package:flutter_boilerplate/src/core/network/api_client.dart';
+import 'package:flutter_boilerplate/src/core/network/api_endpoints.dart';
 import 'package:flutter_boilerplate/src/features/auth/data/models/login_response_model_old.dart';
 
 class AuthService {
@@ -12,8 +13,7 @@ class AuthService {
     String password,
   ) async {
     final response = await _apiClient.get(
-      // ApiEndpoints.login,
-      '/comments',
+      ApiEndpoints.login,
       data: {'email': email, 'password': password},
     );
     return ResponseModel.fromJson(

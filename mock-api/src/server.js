@@ -14,7 +14,7 @@ const profile = {
   email: "johndoe@email.com",
 };
 
-app.post("/login", (req, res) => {
+app.post("/auth/login", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {

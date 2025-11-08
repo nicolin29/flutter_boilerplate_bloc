@@ -74,7 +74,7 @@ analyze:
 # Mock API server management (with nodemon)
 # ---------------------------------------------
 MOCK_API_DIR := mock-api
-SERVER_SCRIPT := server.js
+SERVER_SCRIPT := src/server.js
 
 .PHONY: server-start server-stop server-restart
 
