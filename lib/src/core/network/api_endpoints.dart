@@ -4,7 +4,7 @@ class ApiEndpoints {
   static const String _user = '/user';
 
   // Auth endpoints
-  static const String login = '$_auth/login';
+  static const String login = '$_auth-login';
   static const String register = '$_auth/register';
   static const String logout = '$_auth/logout';
 

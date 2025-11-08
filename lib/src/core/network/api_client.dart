@@ -14,6 +14,8 @@ class ApiClient {
         ),
       );
 
+  Dio get http => _dio;
+
   // GET request
   Future<Response> get(
     String path, {
