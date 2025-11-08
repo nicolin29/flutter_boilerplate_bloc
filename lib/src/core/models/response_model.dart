@@ -15,4 +15,11 @@ abstract class ResponseModel<T> with _$ResponseModel<T> {
     Map<String, dynamic> json,
     T Function(Object?) fromJsonT,
   ) => _$ResponseModelFromJson(json, fromJsonT);
+
+  // Convenience helpers
+  factory ResponseModel.success(T? data, String message) =>
+      ResponseModel(status: 'success', message: message, data: data);
+
+  factory ResponseModel.error(String message, {T? data}) =>
+      ResponseModel(status: 'error', message: message, data: data);
 }
