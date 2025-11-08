@@ -1,6 +1,5 @@
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
 import 'package:flutter_boilerplate/src/core/network/api_client.dart';
-import 'package:flutter_boilerplate/src/core/network/api_endpoints.dart';
 import 'package:flutter_boilerplate/src/features/auth/data/models/login_response_model_old.dart';
 
 class AuthService {
