@@ -26,6 +26,10 @@ help:
 # ---------------------------------------------
 .PHONY: run-dev run-prod
 run-dev:
+	@echo -e "$(YELLOW)Setting up mock API server$(NOCOLOR)"
+	cd mock-api && npm install
+	@echo -e "$(YELLOW)Starting mock API server in background$(NOCOLOR)"
+	cd mock-api && node server.js &
 	@echo -e "$(YELLOW)Running Flutter app in development$(NOCOLOR)"
 	flutter run --dart-define=ENVIRONMENT=development
 
