@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/core/di/injection.dart';
 import 'package:flutter_boilerplate/src/core/utils/error_utils.dart';
 import 'package:flutter_boilerplate/src/features/auth/domain/login_usecase.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
+import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_state.dart';
+
 import 'package:flutter_boilerplate/src/shared/helpers/toast_helper.dart';
+import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String routePath = '/login';
+
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final uc = sl<LoginUsecase>();
+class _LoginPageState extends State<LoginPage> with LoadingMixin {
+  void _onLoginPressed() {
+    context.read<LoginCubit>().login('email', 'password');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Login Page')),
-      body: ElevatedButton(
-        onPressed: () async {
-          try {
-            await uc.execute('email', 'password');
-          } catch (e) {
-            ToastHelper.show(ErrorUtils.getMessage(e));
-          }
-        },
-        child: Text('Click Me'),
-      ),
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return buildLoadingOverlay(
+          child: Scaffold(
+            appBar: AppBar(title: Text('Login Page')),
+            body: ElevatedButton(
+              onPressed: _onLoginPressed,
+              child: Text('Click Me'),
+            ),
+          ),
+        );
+      },
     );
   }
 }

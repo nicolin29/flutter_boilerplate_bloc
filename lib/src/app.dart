@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/src/core/router/app_router.dart';
 import 'package:flutter_boilerplate/src/core/theme/app_theme.dart';
 import 'package:flutter_boilerplate/src/core/utils/size_utils.dart';
-import 'package:flutter_boilerplate/src/features/auth/presentation/pages/login_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,10 +12,10 @@ class App extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, _) {
         SizeUtils.init(context);
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Flutter Demo',
           theme: AppTheme.lightTheme,
-          home: const LoginPage(),
+          routerConfig: AppRouter.router,
         );
       },
     );
