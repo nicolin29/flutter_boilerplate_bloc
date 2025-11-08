@@ -1,28 +1,41 @@
-# Makefile for Flutter project with environment shortcuts
+# =======================================================
+# Makefile for Flutter Project with Mock API Server
+# =======================================================
 
 # Colors for terminal output
 RED    := \033[1;31m
 GREEN  := \033[1;32m
 YELLOW := \033[1;33m
-NOCOLOR     := \033[0m
+CYAN   := \033[1;36m
+NOCOLOR := \033[0m
 
 # ---------------------------------------------
-# Default help command
+# Help Menu
 # ---------------------------------------------
 .PHONY: help
 help:
-	@echo -e "$(GREEN)Flutter Project Makefile$(NOCOLOR)"
-	@echo "Usage:"
-	@echo "  make run-dev		# Run app in development"
-	@echo "  make run-prod		# Run app in production"
-	@echo "  make build-apk-dev	# Build APK for development"
-	@echo "  make build-apk-prod	# Build APK for production"
-	@echo "  make build-runner	# Build Runner with delete conflicting outputs"
-	@echo "  make clean		# Clean project"
-	@echo "  make analyze		# Analyze project with linter"
+	@echo -e "$(CYAN)================ Flutter Project Commands ================$(NOCOLOR)"
+	@echo -e "$(GREEN)App Commands$(NOCOLOR)"
+	@echo "  make run-dev           - Run Flutter app in development mode (starts mock server too)"
+	@echo "  make run-prod          - Run Flutter app in production mode"
+	@echo
+	@echo -e "$(GREEN)Build Commands$(NOCOLOR)"
+	@echo "  make build-apk-dev     - Build development APK"
+	@echo "  make build-apk-prod    - Build production APK"
+	@echo "  make build-runner      - Run build_runner with --delete-conflicting-outputs"
+	@echo
+	@echo -e "$(GREEN)Utility Commands$(NOCOLOR)"
+	@echo "  make clean             - Clean Flutter project"
+	@echo "  make analyze           - Run Flutter analyzer"
+	@echo
+	@echo -e "$(GREEN)Mock API Server Commands$(NOCOLOR)"
+	@echo "  make server-start      - Start mock API server (using nodemon)"
+	@echo "  make server-stop       - Stop mock API server"
+	@echo "  make server-restart    - Restart mock API server"
+	@echo -e "$(CYAN)=========================================================$(NOCOLOR)"
 
 # ---------------------------------------------
-# Run targets
+# Run Flutter
 # ---------------------------------------------
 .PHONY: run-dev run-prod
 run-dev: server-start
@@ -50,7 +63,7 @@ build-apk-prod:
 # ---------------------------------------------
 .PHONY: build-runner
 build-runner:
-	@echo -e "$(GREEN)Build Runner with Delete Conflicting Outputs$(NOCOLOR)"
+	@echo -e "$(GREEN)Running build_runner$(NOCOLOR)"
 	dart run build_runner build --delete-conflicting-outputs
 
 # ---------------------------------------------
@@ -69,9 +82,8 @@ analyze:
 	@echo -e "$(GREEN)Analyzing Flutter project$(NOCOLOR)"
 	flutter analyze
 
-
 # ---------------------------------------------
-# Mock API server management (with nodemon)
+# Mock API Server (with nodemon)
 # ---------------------------------------------
 MOCK_API_DIR := mock-api
 SERVER_SCRIPT := src/server.js
@@ -79,15 +91,14 @@ SERVER_SCRIPT := src/server.js
 .PHONY: server-start server-stop server-restart
 
 server-start:
-	@echo "Installing dependencies..."
+	@echo -e "$(CYAN)Installing mock API dependencies...$(NOCOLOR)"
 	cd $(MOCK_API_DIR) && npm install
-	@echo "Starting mock API server with nodemon..."
-	# Start nodemon in background
+	@echo -e "$(GREEN)Starting mock API server with nodemon...$(NOCOLOR)"
 	cd $(MOCK_API_DIR) && nohup npx nodemon $(SERVER_SCRIPT) > server.log 2>&1 &
-	@echo "Mock API server started"
+	@echo -e "$(GREEN)Mock API server started$(NOCOLOR)"
 
 server-stop:
-	@echo "Stopping mock API server..."
-	@pkill -f "$(SERVER_SCRIPT)" || echo "No running server found"
+	@echo -e "$(RED)Stopping mock API server...$(NOCOLOR)"
+	@pkill -f "$(SERVER_SCRIPT)" || echo "No running server found."
 
 server-restart: server-stop server-start
