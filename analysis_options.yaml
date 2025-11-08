@@ -1,44 +1,29 @@
-# # Use the official Flutter lints as a base
-# include: package:flutter_lints/flutter.yaml
+# Use the Flutter recommended base lints
+include: package:flutter_lints/flutter.yaml
 
-# analyzer:
-#   strong-mode:
-#     implicit-casts: false # Prevent unintended type casting
-#     implicit-dynamic: false # Require explicit dynamic types
+analyzer:
+  strong-mode:
+    implicit-casts: false # Prevent unintended type casting
+    implicit-dynamic: false # Require explicit dynamic types
 
-# linter:
-#   rules:
-#     # General code style
-#     avoid_print: true
-#     always_declare_return_types: true
-#     always_put_control_body_on_new_line: true
-#     always_specify_types: true
-#     prefer_const_constructors: true
-#     prefer_const_literals_to_create_immutables: true
-#     prefer_final_fields: true
-#     prefer_final_locals: true
-#     curly_braces_in_flow_control_structures: true
-#     sort_constructors_first: true
-#     type_annotate_public_apis: true
+linter:
+  rules:
+    # General code quality
+    always_declare_return_types: true
+    always_specify_types: false
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    prefer_expression_function_bodies: false
+    avoid_print: true
+    unnecessary_this: true
 
-#     # Flutter specific
-#     use_key_in_widget_constructors: true
-#     prefer_typing_uninitialized_variables: true
-#     prefer_const_constructors_in_immutables: true
+    # Flutter widget best practices
+    use_key_in_widget_constructors: true
+    avoid_unnecessary_containers: true
 
-#     # Readability & maintainability
-#     avoid_unnecessary_containers: true
-#     avoid_unused_constructor_parameters: true
-#     avoid_init_to_null: true
-#     unnecessary_null_comparison: true
-#     use_super_parameters: true
-
-#     # Freezed / JSON serializable
-#     prefer_if_elements_to_conditional_expressions: true
-#     prefer_is_empty: true
-#     avoid_dynamic_calls: true
-
-#     # Optional: stricter rules
-#     avoid_bool_literals_in_conditional_expressions: true
-#     prefer_expression_function_bodies: true
-#     prefer_final_in_for_each: true
+    # Null-safety / readability
+    avoid_init_to_null: true
+    avoid_dynamic_calls: true
+    prefer_is_empty: true

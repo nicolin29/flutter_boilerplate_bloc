@@ -39,10 +39,10 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
       builder: (context, state) {
         return buildLoadingOverlay(
           child: Scaffold(
-            appBar: AppBar(title: Text('Login Page')),
-            body: Center(
+            appBar: AppBar(title: const Text('Login Page')),
+            body: const Center(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: LoginForm(),
               ),
             ),
