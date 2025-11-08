@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_state.dart';
+import 'package:flutter_boilerplate/src/features/auth/presentation/widgets/login_form.dart';
 import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,10 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LoadingMixin {
-  void _onLoginPressed() {
-    context.read<LoginCubit>().login('email', 'password');
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -44,9 +41,9 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
           child: Scaffold(
             appBar: AppBar(title: Text('Login Page')),
             body: Center(
-              child: ElevatedButton(
-                onPressed: _onLoginPressed,
-                child: Text('Click Me'),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: LoginForm(),
               ),
             ),
           ),
