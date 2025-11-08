@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/core/di/injection.dart';
 import 'package:flutter_boilerplate/src/core/utils/error_utils.dart';

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
 import 'package:flutter_boilerplate/src/core/network/api_client.dart';
 import 'package:flutter_boilerplate/src/core/network/api_endpoints.dart';
