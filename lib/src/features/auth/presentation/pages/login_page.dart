@@ -41,10 +41,7 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
           child: Scaffold(
             appBar: AppBar(title: const Text('Login Page')),
             body: const Center(
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: LoginForm(),
-              ),
+              child: Padding(padding: EdgeInsets.all(16.0), child: LoginForm()),
             ),
           ),
         );
