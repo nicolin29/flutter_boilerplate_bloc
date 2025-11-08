@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/core/di/injection.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/pages/article_page.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/pages/login_page.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,10 @@ class AppRouter {
           create: (_) => sl<LoginCubit>(),
           child: const LoginPage(),
         ),
+      ),
+      GoRoute(
+        path: ArticlePage.routePath,
+        builder: (context, state) => const ArticlePage(),
       ),
     ],
   );
