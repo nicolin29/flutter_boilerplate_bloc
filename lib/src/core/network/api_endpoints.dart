@@ -2,6 +2,7 @@ class ApiEndpoints {
   // Base paths
   static const String _auth = '/auth';
   static const String _user = '/user';
+  static const String _articles = '/articles';
 
   // Auth endpoints
   static const String login = '$_auth/login';
@@ -11,4 +12,8 @@ class ApiEndpoints {
   // User endpoints
   static const String profile = '$_user/profile';
   static const String update = '$_user/update';
+
+  // Articles endpoints
+  static const String getArticles = _articles;
+  static String getArticlesById(String id) => '$_articles/$id';
 }
