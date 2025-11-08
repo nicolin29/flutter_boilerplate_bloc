@@ -1,5 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/core/config/app_config.dart';
+import 'package:flutter_boilerplate/src/core/network/interceptors/error_interceptor.dart';
+import 'package:flutter_boilerplate/src/core/network/interceptors/logging_interceptor.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiClient {
   late final Dio _dio;
@@ -12,7 +17,10 @@ class ApiClient {
           receiveTimeout: Duration(milliseconds: AppConfig.receiveTimeout),
           headers: {'Content-Type': 'application/json'},
         ),
-      );
+      ) {
+    // Add Interceptors
+    _dio.interceptors.addAll([LoggingInterceptor.build(), ErrorInterceptor()]);
+  }
 
   Dio get http => _dio;
 
@@ -22,11 +30,11 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
   }) async {
-    try {
-      return await _dio.get(path, queryParameters: queryParams, data: data);
-    } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? e.message);
-    }
+    return await _dio.get(
+      path + 'asd',
+      queryParameters: queryParams,
+      data: data,
+    );
   }
 
   // POST request
@@ -35,11 +43,7 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
   }) async {
-    try {
-      return await _dio.post(path, queryParameters: queryParams, data: data);
-    } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? e.message);
-    }
+    return await _dio.post(path, queryParameters: queryParams, data: data);
   }
 
   // PUT request
@@ -48,11 +52,7 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
   }) async {
-    try {
-      return await _dio.put(path, queryParameters: queryParams, data: data);
-    } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? e.message);
-    }
+    return await _dio.put(path, queryParameters: queryParams, data: data);
   }
 
   // DELETE request
@@ -61,10 +61,6 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
   }) async {
-    try {
-      return await _dio.delete(path, queryParameters: queryParams, data: data);
-    } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? e.message);
-    }
+    return await _dio.delete(path, queryParameters: queryParams, data: data);
   }
 }

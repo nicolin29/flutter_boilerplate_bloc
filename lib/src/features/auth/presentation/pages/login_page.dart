@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/src/core/di/injection.dart';
+import 'package:flutter_boilerplate/src/core/utils/error_utils.dart';
 import 'package:flutter_boilerplate/src/features/auth/domain/login_usecase.dart';
+import 'package:flutter_boilerplate/src/shared/helpers/toast_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,7 +21,11 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(title: Text('Login Page')),
       body: ElevatedButton(
         onPressed: () async {
-          await uc.execute('email', 'password');
+          try {
+            await uc.execute('email', 'password');
+          } catch (e) {
+            ToastHelper.show(ErrorUtils.getMessage(e));
+          }
         },
         child: Text('Click Me'),
       ),

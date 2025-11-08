@@ -13,17 +13,13 @@ class AuthService {
     String email,
     String password,
   ) async {
-    try {
-      final response = await _apiClient.get(
-        ApiEndpoints.login,
-        data: {'email': email, 'password': password},
-      );
-      return ResponseModel.fromJson(
-        response.data,
-        (data) => LoginResponseModel.fromJson(data as Map<String, dynamic>),
-      );
-    } on DioException catch (e) {
-      throw Exception(e.response?.data['message'] ?? e.message);
-    }
+    final response = await _apiClient.get(
+      ApiEndpoints.login,
+      data: {'email': email, 'password': password},
+    );
+    return ResponseModel.fromJson(
+      response.data,
+      (data) => LoginResponseModel.fromJson(data as Map<String, dynamic>),
+    );
   }
 }

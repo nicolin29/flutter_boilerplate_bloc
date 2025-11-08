@@ -84,3 +84,6 @@ Response flows back → Cubit emits AuthSuccess or AuthFailure → UI updates.
 
 UI Flow:
 https://chatgpt.com/s/t_690dad9dacb08191b4f52585bf4d8ae6
+
+DIO Interceptor:
+https://chatgpt.com/s/t_690ec2025ae88191855836dd09227e41
