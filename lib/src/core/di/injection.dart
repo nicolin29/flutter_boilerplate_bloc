@@ -10,24 +10,24 @@ import 'package:flutter_boilerplate/src/features/auth/domain/login_usecase.dart'
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:get_it/get_it.dart';
 
-final sl = GetIt.instance;
+final di = GetIt.instance;
 
 Future<void> initDI() async {
   // ----- Core / Network -----
-  sl.registerLazySingleton(() => ApiClient());
+  di.registerLazySingleton(() => ApiClient());
 
   // ----- Auth Feature -----
-  sl.registerLazySingleton(() => AuthService(sl<ApiClient>()));
-  sl.registerLazySingleton(() => AuthRepository(sl<AuthService>()));
-  sl.registerLazySingleton(() => LoginUsecase(sl<AuthRepository>()));
+  di.registerLazySingleton(() => AuthService(di<ApiClient>()));
+  di.registerLazySingleton(() => AuthRepository(di<AuthService>()));
+  di.registerLazySingleton(() => LoginUsecase(di<AuthRepository>()));
 
   // ----- Article Feature -----
-  sl.registerLazySingleton(() => ArticleService(sl<ApiClient>()));
-  sl.registerLazySingleton(() => ArticleRepository(sl<ArticleService>()));
-  sl.registerLazySingleton(() => ArticleUsecase(sl<ArticleRepository>()));
+  di.registerLazySingleton(() => ArticleService(di<ApiClient>()));
+  di.registerLazySingleton(() => ArticleRepository(di<ArticleService>()));
+  di.registerLazySingleton(() => ArticleUsecase(di<ArticleRepository>()));
 
   // ----- Presentation Layer / Cubit -----
-  sl.registerFactory(() => LoginCubit(sl<LoginUsecase>()));
-  sl.registerFactory(() => ArticleListCubit(sl<ArticleUsecase>()));
-  sl.registerFactory(() => ArticleDetailCubit(sl<ArticleUsecase>()));
+  di.registerFactory(() => LoginCubit(di<LoginUsecase>()));
+  di.registerFactory(() => ArticleListCubit(di<ArticleUsecase>()));
+  di.registerFactory(() => ArticleDetailCubit(di<ArticleUsecase>()));
 }

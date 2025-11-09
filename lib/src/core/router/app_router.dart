@@ -15,14 +15,14 @@ class AppRouter {
       GoRoute(
         path: LoginPage.routePath,
         builder: (context, state) => BlocProvider(
-          create: (_) => sl<LoginCubit>(),
+          create: (_) => di<LoginCubit>(),
           child: const LoginPage(),
         ),
       ),
       GoRoute(
         path: ArticleListPage.routePath,
         builder: (context, state) => BlocProvider(
-          create: (_) => sl<ArticleListCubit>(),
+          create: (_) => di<ArticleListCubit>(),
           child: const ArticleListPage(),
         ),
       ),
@@ -32,7 +32,7 @@ class AppRouter {
           final articleId = int.parse(state.pathParameters['id']!);
 
           return BlocProvider(
-            create: (_) => sl<ArticleDetailCubit>(),
+            create: (_) => di<ArticleDetailCubit>(),
             child: ArticleDetailPage(articleId: articleId),
           );
         },
