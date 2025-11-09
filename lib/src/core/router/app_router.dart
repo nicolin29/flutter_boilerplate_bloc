@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/core/di/injection.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_page_cubit/article_page_cubit.dart';
 import 'package:flutter_boilerplate/src/features/article/presentation/pages/article_page.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/pages/login_page.dart';
@@ -18,7 +19,10 @@ class AppRouter {
       ),
       GoRoute(
         path: ArticlePage.routePath,
-        builder: (context, state) => const ArticlePage(),
+        builder: (context, state) => BlocProvider(
+          create: (_) => sl<ArticlePageCubit>(),
+          child: const ArticlePage(),
+        ),
       ),
     ],
   );
