@@ -1,9 +1,12 @@
+import 'package:flutter_boilerplate/src/features/article/data/models/article_list_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 import 'package:flutter_boilerplate/src/features/article/data/datasources/article_service.dart';
 import 'package:flutter_boilerplate/src/features/article/data/repositories/article_repository.dart';
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
+
+import '../../mocks/mock_articles_json.dart';
 
 class MockArticleService extends Mock implements ArticleService {}
 
@@ -35,18 +38,24 @@ void main() {
   ];
 
   test('fetchArticles returns list of articles on success', () async {
-    // Arrange
-    when(() => mockService.getArticles()).thenAnswer(
-      (_) async => ResponseModel.success(articlesJson, 'Fetched successfully'),
+    final page = 1;
+    final limit = 10;
+
+    when(() => mockService.getArticles(page, limit)).thenAnswer(
+      (_) async => ResponseModel.success(
+        ArticleListModel.fromJson(mockArticlesJson),
+        'Fetched successfully',
+      ),
     );
 
     // Act
-    final result = await repository.getArticles();
+    final result = await repository.getArticles(page, limit);
 
     // Assert
-    expect(result, isA<List<ArticleModel>>());
-    expect(result.length, 3);
-    expect(result.first.title, 'Article 1');
+    expect(result, isA<ArticleListModel>());
+    expect(result.articles, isA<List<ArticleModel>>());
+    expect(result.articles?.length, 10);
+    expect(result.articles?.first.title, 'Article 1');
   });
 
   test('findArticleById returns the correct article when ID exists', () async {
