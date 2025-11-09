@@ -20,4 +20,19 @@ class ArticleRepository {
 
     return articles;
   }
+
+  Future<ArticleModel> findArticleById(int id) async {
+    final response = await _articleService.findArticleById(id);
+
+    if (response.status != 'success') {
+      throw Exception(response.message);
+    }
+
+    final article = response.data;
+    if (article == null) {
+      throw Exception('No articles data received from server');
+    }
+
+    return article;
+  }
 }

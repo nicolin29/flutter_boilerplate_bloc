@@ -17,4 +17,12 @@ class ArticleService {
           .toList();
     });
   }
+
+  Future<ResponseModel<ArticleModel>> findArticleById(int id) async {
+    final response = await _apiClient.get(ApiEndpoints.getArticleById(id));
+    return ResponseModel.fromJson(
+      response.data,
+      (data) => ArticleModel.fromJson(data as Map<String, dynamic>),
+    );
+  }
 }

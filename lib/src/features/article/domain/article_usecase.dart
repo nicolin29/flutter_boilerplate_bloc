@@ -9,4 +9,8 @@ class ArticleUsecase {
   Future<List<ArticleModel>> fetchArticles() async {
     return await _articleRepository.fetchArticles();
   }
+
+  Future<ArticleModel> findArticleById(int id) async {
+    return await _articleRepository.findArticleById(id);
+  }
 }

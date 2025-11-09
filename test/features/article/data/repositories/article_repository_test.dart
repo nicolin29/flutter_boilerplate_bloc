@@ -48,4 +48,24 @@ void main() {
     expect(result.length, 3);
     expect(result.first.title, 'Article 1');
   });
+
+  test('findArticleById returns the correct article when ID exists', () async {
+    // Arrange
+    when(() => mockService.findArticleById(1)).thenAnswer(
+      (_) async => ResponseModel.success(
+        articlesJson.firstWhere((i) => i.id == 1), // ✅ use ['id'] if JSON map
+        'Fetched successfully',
+      ),
+    );
+
+    // Act
+    final result = await repository.findArticleById(
+      1,
+    ); // ✅ match actual method name
+
+    // Assert
+    expect(result, isA<ArticleModel>());
+    expect(result.id, 1);
+    expect(result.title, 'Article 1');
+  });
 }

@@ -15,5 +15,5 @@ class ApiEndpoints {
 
   // Articles endpoints
   static const String getArticles = _articles;
-  static String getArticlesById(String id) => '$_articles/$id';
+  static String getArticleById(int id) => '$_articles/$id';
 }
