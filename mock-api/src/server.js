@@ -14,26 +14,12 @@ const profile = {
   email: "johndoe@email.com",
 };
 
-const articles = [
-  {
-    id: 1,
-    title: "Article 1",
-    content: "This is the content of Article 1",
-    image: "https://picsum.photos/id/1011/600/400",
-  },
-  {
-    id: 2,
-    title: "Article 2",
-    content: "This is the content of Article 2",
-    image: "https://picsum.photos/id/1012/600/400",
-  },
-  {
-    id: 3,
-    title: "Article 3",
-    content: "This is the content of Article 3",
-    image: "https://picsum.photos/id/1013/600/400",
-  },
-];
+const articles = Array.from({ length: 50 }, (_, i) => ({
+  id: i + 1,
+  title: `Article ${i + 1}`,
+  image: `https://picsum.photos/seed/article${i + 1}/400/250`,
+  content: `This is the content of Article ${i + 1}.`,
+}));
 
 app.post("/auth/login", (req, res) => {
   const { email, password } = req.body;
@@ -57,10 +43,33 @@ app.post("/auth/login", (req, res) => {
 });
 
 app.get("/articles", (req, res) => {
+  // Parse query params
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  // Calculate start and end indexes
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+
+  // Slice the data for this page
+  const paginatedArticles = articles.slice(startIndex, endIndex);
+
+  // Determine if there's another page
+  const hasMore = endIndex < articles.length;
+
   return ApiResponse.success(
     res,
-    articles.map((a) => ({ id: a.id, title: a.title, image: a.image })),
-    "Fetched Successfully"
+    {
+      articles: paginatedArticles.map((a) => ({
+        id: a.id,
+        title: a.title,
+        image: a.image,
+      })),
+      page,
+      limit,
+      hasMore,
+    },
+    "Fetched successfully"
   );
 });
 
