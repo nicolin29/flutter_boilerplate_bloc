@@ -1,6 +1,7 @@
 import 'package:flutter_boilerplate/src/core/models/response_model.dart';
 import 'package:flutter_boilerplate/src/core/network/api_client.dart';
 import 'package:flutter_boilerplate/src/core/network/api_endpoints.dart';
+import 'package:flutter_boilerplate/src/features/article/data/models/article_list_model.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 
 class ArticleService {
@@ -8,13 +9,16 @@ class ArticleService {
 
   ArticleService(this._apiClient);
 
-  Future<ResponseModel<List<ArticleModel>>> fetchArticles() async {
-    final response = await _apiClient.get(ApiEndpoints.getArticles);
+  Future<ResponseModel<ArticleListModel>> fetchArticles(
+    int page,
+    int limit,
+  ) async {
+    final response = await _apiClient.get(
+      ApiEndpoints.getArticles,
+      queryParams: {'page': page, 'limit': limit},
+    );
     return ResponseModel.fromJson(response.data, (data) {
-      final list = data as List<dynamic>;
-      return list
-          .map((e) => ArticleModel.fromJson(e as Map<String, dynamic>))
-          .toList();
+      return ArticleListModel.fromJson(data as Map<String, dynamic>);
     });
   }
 

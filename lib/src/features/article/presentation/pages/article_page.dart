@@ -14,18 +14,19 @@ class ArticlePage extends StatefulWidget {
 
 class _ArticlePageState extends State<ArticlePage> {
   final ScrollController _scrollController = ScrollController();
+  late ArticlePageCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    final cubit = context.read<ArticlePageCubit>();
-    cubit.fetchFirstPage(); // initial load
+    _cubit = context.read<ArticlePageCubit>();
+    _cubit.fetchFirstPage(); // initial load
 
     _scrollController.addListener(() {
       // when user scrolls near the bottom, fetch more
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
-        cubit.fetchNextPage();
+        _cubit.fetchNextPage();
       }
     });
   }
@@ -70,7 +71,7 @@ class _ArticlePageState extends State<ArticlePage> {
     }
 
     return RefreshIndicator(
-      onRefresh: () => context.read<ArticlePageCubit>().refresh(),
+      onRefresh: () => _cubit.refresh(),
       child: ListView.builder(
         controller: _scrollController,
         itemCount: hasMore ? articles.length + 1 : articles.length,

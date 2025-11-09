@@ -22,7 +22,6 @@ class ArticlePageCubit extends Cubit<ArticleListState> {
   }
 
   Future<void> fetchNextPage() async {
-    // avoid double fetching or fetching when no more data
     if (_isFetching || !_hasMore) return;
     _isFetching = true;
 
@@ -33,24 +32,17 @@ class ArticlePageCubit extends Cubit<ArticleListState> {
         orElse: () => <ArticleModel>[],
       );
 
-      // emit loading state with existing data
       emit(ArticleListState.loading(currentArticles, hasMore: _hasMore));
 
-      // fetch next page
-      final newArticles = await articleUsecase.fetchArticles(
-        page: _currentPage,
-      );
+      final response = await articleUsecase.fetchArticles(_currentPage, 20);
 
-      // merge old + new
+      final newArticles = response.articles ?? [];
       final updatedArticles = [...currentArticles, ...newArticles];
 
-      // if fewer items returned than expected, assume no more pages
-      _hasMore = newArticles.isNotEmpty;
+      _hasMore = response.hasMore ?? false;
+      _currentPage++;
 
       emit(ArticleListState.success(updatedArticles, hasMore: _hasMore));
-
-      // next page index
-      if (_hasMore) _currentPage++;
     } catch (e) {
       emit(ArticleListState.error(e.toString()));
     } finally {

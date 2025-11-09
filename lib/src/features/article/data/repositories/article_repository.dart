@@ -1,4 +1,5 @@
 import 'package:flutter_boilerplate/src/features/article/data/datasources/article_service.dart';
+import 'package:flutter_boilerplate/src/features/article/data/models/article_list_model.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 
 class ArticleRepository {
@@ -6,19 +7,14 @@ class ArticleRepository {
 
   ArticleRepository(this._articleService);
 
-  Future<List<ArticleModel>> fetchArticles() async {
-    final response = await _articleService.fetchArticles();
+  Future<ArticleListModel> fetchArticles(int page, int limit) async {
+    final response = await _articleService.fetchArticles(page, limit);
 
     if (response.status != 'success') {
       throw Exception(response.message);
     }
 
-    final articles = response.data;
-    if (articles == null) {
-      throw Exception('No articles data received from server');
-    }
-
-    return articles;
+    return response.data!;
   }
 
   Future<ArticleModel> findArticleById(int id) async {
