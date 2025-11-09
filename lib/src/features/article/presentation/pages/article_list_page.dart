@@ -104,7 +104,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
       ),
       onTap: () {
         // Navigate to detail page (if exists)
-        context.go('/article-detail/${article.id}');
+        context.push('/article-detail/${article.id}');
       },
     );
   }
