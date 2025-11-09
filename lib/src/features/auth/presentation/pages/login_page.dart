@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boilerplate/src/features/article/presentation/pages/article_page.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/pages/article_list_page.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_state.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/widgets/login_form.dart';
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
           loading: () => showLoading(),
           success: (user) {
             hideLoading();
-            context.go(ArticlePage.routePath);
+            context.go(ArticleListPage.routePath);
           },
           failure: (message) {
             hideLoading();

@@ -9,7 +9,7 @@ class ArticleService {
 
   ArticleService(this._apiClient);
 
-  Future<ResponseModel<ArticleListModel>> fetchArticles(
+  Future<ResponseModel<ArticleListModel>> getArticles(
     int page,
     int limit,
   ) async {

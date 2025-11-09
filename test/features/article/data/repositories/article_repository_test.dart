@@ -36,12 +36,12 @@ void main() {
 
   test('fetchArticles returns list of articles on success', () async {
     // Arrange
-    when(() => mockService.fetchArticles()).thenAnswer(
+    when(() => mockService.getArticles()).thenAnswer(
       (_) async => ResponseModel.success(articlesJson, 'Fetched successfully'),
     );
 
     // Act
-    final result = await repository.fetchArticles();
+    final result = await repository.getArticles();
 
     // Assert
     expect(result, isA<List<ArticleModel>>());

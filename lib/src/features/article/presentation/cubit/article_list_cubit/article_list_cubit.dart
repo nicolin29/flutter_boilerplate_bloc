@@ -1,16 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 import 'package:flutter_boilerplate/src/features/article/domain/article_usecase.dart';
-import 'article_page_state.dart';
+import 'article_list_state.dart';
 
-class ArticlePageCubit extends Cubit<ArticleListState> {
+class ArticleListCubit extends Cubit<ArticleListState> {
   final ArticleUsecase articleUsecase;
 
   int _currentPage = 1;
   bool _isFetching = false;
   bool _hasMore = true;
 
-  ArticlePageCubit(this.articleUsecase)
+  ArticleListCubit(this.articleUsecase)
     : super(const ArticleListState.initial());
 
   Future<void> fetchFirstPage() async {
@@ -34,7 +34,7 @@ class ArticlePageCubit extends Cubit<ArticleListState> {
 
       emit(ArticleListState.loading(currentArticles, hasMore: _hasMore));
 
-      final response = await articleUsecase.fetchArticles(_currentPage, 20);
+      final response = await articleUsecase.getArticles(_currentPage, 20);
 
       final newArticles = response.articles ?? [];
       final updatedArticles = [...currentArticles, ...newArticles];

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
-import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_page_cubit/article_page_cubit.dart';
-import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_page_cubit/article_page_state.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_list_cubit/article_list_cubit.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_list_cubit/article_list_state.dart';
 
-class ArticlePage extends StatefulWidget {
-  static const String routePath = '/article';
-  const ArticlePage({super.key});
+class ArticleListPage extends StatefulWidget {
+  static const String routePath = '/article-list';
+  const ArticleListPage({super.key});
 
   @override
-  State<ArticlePage> createState() => _ArticlePageState();
+  State<ArticleListPage> createState() => _ArticleListPageState();
 }
 
-class _ArticlePageState extends State<ArticlePage> {
+class _ArticleListPageState extends State<ArticleListPage> {
   final ScrollController _scrollController = ScrollController();
-  late ArticlePageCubit _cubit;
+  late ArticleListCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    _cubit = context.read<ArticlePageCubit>();
+    _cubit = context.read<ArticleListCubit>();
     _cubit.fetchFirstPage(); // initial load
 
     _scrollController.addListener(() {
@@ -41,7 +41,7 @@ class _ArticlePageState extends State<ArticlePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Articles')),
-      body: BlocBuilder<ArticlePageCubit, ArticleListState>(
+      body: BlocBuilder<ArticleListCubit, ArticleListState>(
         builder: (context, state) {
           return state.when(
             initial: () => const Center(child: CircularProgressIndicator()),
@@ -116,7 +116,7 @@ class _ArticlePageState extends State<ArticlePage> {
           Text('Error: $message'),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => context.read<ArticlePageCubit>().refresh(),
+            onPressed: () => context.read<ArticleListCubit>().refresh(),
             child: const Text('Retry'),
           ),
         ],

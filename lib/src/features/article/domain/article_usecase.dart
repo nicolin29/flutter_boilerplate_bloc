@@ -7,8 +7,8 @@ class ArticleUsecase {
 
   ArticleUsecase(this._articleRepository);
 
-  Future<ArticleListModel> fetchArticles(int page, int limit) async {
-    return await _articleRepository.fetchArticles(page, limit);
+  Future<ArticleListModel> getArticles(int page, int limit) async {
+    return await _articleRepository.getArticles(page, limit);
   }
 
   Future<ArticleModel> findArticleById(int id) async {

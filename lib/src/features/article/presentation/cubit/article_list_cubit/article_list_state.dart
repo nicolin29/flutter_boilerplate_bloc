@@ -1,7 +1,7 @@
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'article_page_state.freezed.dart';
+part 'article_list_state.freezed.dart';
 
 @freezed
 class ArticleListState with _$ArticleListState {

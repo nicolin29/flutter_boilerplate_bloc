@@ -33,7 +33,7 @@ void main() {
       }, path: ApiEndpoints.getArticles),
     );
 
-    final result = await articleService.fetchArticles();
+    final result = await articleService.getArticles();
 
     expect(result.status, 'success');
     expect(result.data?.length, 1);

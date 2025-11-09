@@ -7,8 +7,8 @@ class ArticleRepository {
 
   ArticleRepository(this._articleService);
 
-  Future<ArticleListModel> fetchArticles(int page, int limit) async {
-    final response = await _articleService.fetchArticles(page, limit);
+  Future<ArticleListModel> getArticles(int page, int limit) async {
+    final response = await _articleService.getArticles(page, limit);
 
     if (response.status != 'success') {
       throw Exception(response.message);
