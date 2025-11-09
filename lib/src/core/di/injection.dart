@@ -2,6 +2,7 @@ import 'package:flutter_boilerplate/src/core/network/api_client.dart';
 import 'package:flutter_boilerplate/src/features/article/data/datasources/article_service.dart';
 import 'package:flutter_boilerplate/src/features/article/data/repositories/article_repository.dart';
 import 'package:flutter_boilerplate/src/features/article/domain/article_usecase.dart';
+import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_detail_cubit/article_detail_cubit.dart';
 import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_list_cubit/article_list_cubit.dart';
 import 'package:flutter_boilerplate/src/features/auth/data/datasources/auth_service.dart';
 import 'package:flutter_boilerplate/src/features/auth/data/repositories/auth_repository.dart';
@@ -28,4 +29,5 @@ Future<void> initDI() async {
   // ----- Presentation Layer / Cubit -----
   sl.registerFactory(() => LoginCubit(sl<LoginUsecase>()));
   sl.registerFactory(() => ArticleListCubit(sl<ArticleUsecase>()));
+  sl.registerFactory(() => ArticleDetailCubit(sl<ArticleUsecase>()));
 }

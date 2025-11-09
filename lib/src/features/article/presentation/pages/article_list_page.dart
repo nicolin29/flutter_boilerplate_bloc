@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_list_cubit/article_list_cubit.dart';
 import 'package:flutter_boilerplate/src/features/article/presentation/cubit/article_list_cubit/article_list_state.dart';
+import 'package:go_router/go_router.dart';
 
 class ArticleListPage extends StatefulWidget {
   static const String routePath = '/article-list';
@@ -103,7 +104,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
       ),
       onTap: () {
         // Navigate to detail page (if exists)
-        Navigator.pushNamed(context, '/article-detail', arguments: article.id);
+        context.go('/article-detail/${article.id}');
       },
     );
   }
