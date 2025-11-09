@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilerplate/src/core/constants/app_constants.dart';
 import 'package:flutter_boilerplate/src/features/article/data/models/article_model.dart';
 import 'package:flutter_boilerplate/src/features/article/domain/article_usecase.dart';
 import 'article_list_state.dart';
@@ -34,7 +35,10 @@ class ArticleListCubit extends Cubit<ArticleListState> {
 
       emit(ArticleListState.loading(currentArticles, hasMore: _hasMore));
 
-      final response = await articleUsecase.getArticles(_currentPage, 20);
+      final response = await articleUsecase.getArticles(
+        _currentPage,
+        AppConstants.paginationLimit,
+      );
 
       final newArticles = response.articles ?? [];
       final updatedArticles = [...currentArticles, ...newArticles];
