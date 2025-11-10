@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_c
 import 'package:flutter_boilerplate/src/features/auth/presentation/cubit/login_state.dart';
 import 'package:flutter_boilerplate/src/features/auth/presentation/widgets/login_form.dart';
 import 'package:flutter_boilerplate/src/shared/mixins/loading_mixin.dart';
+import 'package:flutter_boilerplate/src/shared/mixins/snackbar_mixin.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,7 +17,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoadingMixin {
+class _LoginPageState extends State<LoginPage>
+    with LoadingMixin, SnackbarMixin {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -30,9 +32,7 @@ class _LoginPageState extends State<LoginPage> with LoadingMixin {
           },
           failure: (message) {
             hideLoading();
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(message)));
+            showSnack(message);
           },
         );
       },
