@@ -16,7 +16,7 @@ NOCOLOR := \033[0m
 help:
 	@echo -e "$(CYAN)================ Flutter Project Commands ================$(NOCOLOR)"
 	@echo -e "$(GREEN)App Commands$(NOCOLOR)"
-	@echo "  make run-dev           - Run Flutter app in development mode (starts mock server too)"
+	@echo "  make run-dev           - Run Flutter app in development mode"
 	@echo "  make run-prod          - Run Flutter app in production mode"
 	@echo
 	@echo -e "$(GREEN)Build Commands$(NOCOLOR)"
@@ -28,17 +28,13 @@ help:
 	@echo "  make clean             - Clean Flutter project"
 	@echo "  make analyze           - Run Flutter analyzer"
 	@echo
-	@echo -e "$(GREEN)Mock API Server Commands$(NOCOLOR)"
-	@echo "  make server-start      - Start mock API server (using nodemon)"
-	@echo "  make server-stop       - Stop mock API server"
-	@echo "  make server-restart    - Restart mock API server"
 	@echo -e "$(CYAN)=========================================================$(NOCOLOR)"
 
 # ---------------------------------------------
 # Run Flutter
 # ---------------------------------------------
 .PHONY: run-dev run-prod
-run-dev: server-start
+run-dev: 
 	@echo -e "$(YELLOW)Running Flutter app in development$(NOCOLOR)"
 	flutter run --dart-define=ENVIRONMENT=development
 
@@ -81,24 +77,3 @@ clean:
 analyze:
 	@echo -e "$(GREEN)Analyzing Flutter project$(NOCOLOR)"
 	flutter analyze
-
-# ---------------------------------------------
-# Mock API Server (with nodemon)
-# ---------------------------------------------
-MOCK_API_DIR := mock-api
-SERVER_SCRIPT := src/server.js
-
-.PHONY: server-start server-stop server-restart
-
-server-start:
-	@echo -e "$(CYAN)Installing mock API dependencies...$(NOCOLOR)"
-	cd $(MOCK_API_DIR) && npm install
-	@echo -e "$(GREEN)Starting mock API server with nodemon...$(NOCOLOR)"
-	cd $(MOCK_API_DIR) && nohup npx nodemon $(SERVER_SCRIPT) > server.log 2>&1 &
-	@echo -e "$(GREEN)Mock API server started$(NOCOLOR)"
-
-server-stop:
-	@echo -e "$(RED)Stopping mock API server...$(NOCOLOR)"
-	@pkill -f "$(SERVER_SCRIPT)" || echo "No running server found."
-
-server-restart: server-stop server-start

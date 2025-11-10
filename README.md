@@ -45,6 +45,27 @@ Key technologies included
 - flutter_dotenv (environment config)
 - freezed + json_serializable (immutable models & codegen)
 
+### 3. Mock API (Optional for Backend)
+
+For local development or testing without a backend, this project can connect to a lightweight mock API:
+👉 [Mock API — Node.js version](https://github.com/nicolin29/mock-api-nodejs)
+
+To run it locally:
+
+```bash
+git clone https://github.com/nicolin29/mock-api-nodejs.git
+cd mock-api-nodejs
+npm install
+npm run dev
+```
+
+By default, it runs at http://localhost:3000
+You can then update your .env file in the Flutter project:
+
+```bash
+BASE_URL=http://localhost:3000
+```
+
 ## Why this project is useful
 
 - Ready-made architecture and folders for medium-sized apps
